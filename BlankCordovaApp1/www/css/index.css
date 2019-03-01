@@ -19,9 +19,16 @@ body {
     font-size: 12px;
 }
 
-.ui-page {
+#logoheader {
+    text-align:right;
+}
+.ui-header {
+    background-color: #b6cc85;
+    border-color: #b6cc85;
+}
 
-   # background: url('../images/fondecranmess.jpg');
+.ui-page {
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
 }
