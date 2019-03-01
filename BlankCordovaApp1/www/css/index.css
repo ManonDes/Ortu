@@ -21,7 +21,7 @@ body {
 
 .ui-page {
 
-    background: url('../images/fondecranmess.jpg');
+   # background: url('../images/fondecranmess.jpg');
     background-size: cover;
     background-position: center;
 }

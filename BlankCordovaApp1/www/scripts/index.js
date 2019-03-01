@@ -36,11 +36,13 @@
         //var span = $("#itemCount");
         var temp = [];
 
-        $.getJSON("https://", function (data) {
+        //$.getJSON("http://mmi_user:mmi@iut.corse@193.48.29.108/html/MMI/wordpress/Desmettre/wordpress/index.php/wp-json/wp/v2/posts", function (data) {
+        $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts", function (data) {
             if (data.length > 0) {
                 $.each(data, function (index) {
-                    var content = '<h1 class="ui-li-heading">' + data[index].title.rendered + '</h1><p class="ui-li-desc">Mon article</p>'
-                    var article = '<li>' + content + '</li>';
+                    //var content = '<h1 class="ui-li-heading">' + data[index].title.rendered + '</h1><p class="ui-li-desc">Mon article</p>'
+                    var content = data[index].title.rendered
+                    var article = '<li><a href="#">' + content + '</a></li>';
 
                     // add content to remove old li after the add
                     temp[index] = content;
@@ -61,7 +63,7 @@
                 //navigator.notification.alert('a new article has just arrived', '','New Article', 'Ok');
             }
 
-            // remove the old elements from li list    
+           
             li.each(function () {
                 if ($.inArray($(this).html(), temp) == -1) {
                     $(this).remove();
@@ -74,7 +76,7 @@
     }
 
     function initialCheck() {
-        $("#articlelist").on("filterablefilter", function (event,ui) {
+        $("#articlelist").on("filterablefilter", function (event, ui) {
             getArticles();
         });
        
