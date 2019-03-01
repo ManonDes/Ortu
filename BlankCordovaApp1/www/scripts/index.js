@@ -6,6 +6,7 @@
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    initialCheck();
 
     function onDeviceReady() {
         // Gérer les événements de suspension et de reprise Cordova
@@ -27,4 +28,56 @@
     function onResume() {
         // TODO: cette application a été réactivée. Restaurez l'état de l'application ici.
     };
+
+    function getArticles() {
+
+        var li = $('#articlelist li');
+        var articlelist = $("#articlelist");
+        //var span = $("#itemCount");
+        var temp = [];
+
+        $.getJSON("https://", function (data) {
+            if (data.length > 0) {
+                $.each(data, function (index) {
+                    var content = '<h1 class="ui-li-heading">' + data[index].title.rendered + '</h1><p class="ui-li-desc">Mon article</p>'
+                    var article = '<li>' + content + '</li>';
+
+                    // add content to remove old li after the add
+                    temp[index] = content;
+
+                    var exist = false;
+                    li.each(function () {
+                        if ($(this).html() == content) exist = true;
+                    });
+                    if (!exist) {
+                        articlelist.append(article);
+                    }
+
+                });
+
+                // Refresh
+                articlelist.listview("refresh");
+
+                //navigator.notification.alert('a new article has just arrived', '','New Article', 'Ok');
+            }
+
+            // remove the old elements from li list    
+            li.each(function () {
+                if ($.inArray($(this).html(), temp) == -1) {
+                    $(this).remove();
+                }
+            });
+
+        });
+
+        //span.text(li.length);
+    }
+
+    function initialCheck() {
+        $("#articlelist").on("filterablefilter", function (event,ui) {
+            getArticles();
+        });
+       
+    };
+
 } )();

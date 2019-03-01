@@ -20,9 +20,10 @@ body {
 }
 
 .ui-page {
-    background: url('../images/ortupagedacc.png');
+
+    background: url('../images/fondecranmess.jpg');
     background-size: cover;
-    background-position:center;
+    background-position: center;
 }
 
 

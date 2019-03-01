@@ -24,27 +24,80 @@
     
 <body>
     <div data-role="page" id="home">
-        <div date-role="header" data-theme="b">
 
-            <h1>Accueil</h1>
-        </div>
-        <div date-role="content">
+        <div data-role="header" data-theme="b">
+            <!--   <a id="btnRefresh" href="#" data-icon="refresh" class="ui-btn-right">Refresh</a>
 
-            <div class="search-box">
-                <input type="text" autocomplete="off" placeholder="Recherche rapide" />
-                <div class="result"></div>
-            </div>
+
+    <img src="" class="ui-btn-center" />   -->
 
         </div>
-        <div date-role="footer" data-theme="b" data-position="fixed" id="footerhome">
+
+        <div data-role="content">
+
+            <ul data-role="listview" id="articlelist" data-filter="true" data-filter-placeholder="Recherche"></ul>
 
         </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed" id="footerbib">
+        </div>
+
     </div>
+
+    <div data-role="page" id="propose" data-add-back-btn="true" data-back-btn-text="Retour">
+
+        <div data-role="header" data-theme="b">
+
+        </div>
+
+        <div data-role="content">
+
+        </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed" id="footerpropose">
+        </div>
+
+    </div>
+
+    <div data-role="page" id="message" data-add-back-btn="true" data-back-btn-text="Retour">
+
+        <div data-role="header" data-theme="b">
+
+        </div>
+
+        <div data-role="content">
+
+        </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed" id="footermessage">
+        </div>
+
+    </div>
+
+    <div data-role="page" id="profil" data-add-back-btn="true" data-back-btn-text="Retour">
+
+        <div data-role="header" data-theme="b">
+
+        </div>
+
+        <div data-role="content">
+
+        </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed" id="footerprofil">
+        </div>
+
+    </div>
+
+
 
 
     <script>
         $('#home').bind('pagebeforeshow', function (event) {
             $("#footerhome").load('footer.html', function () { $(this).trigger("create") });
+            $("#footerpropose").load('footer.html', function () { $(this).trigger("create") });
+            $("#footermessage").load('footer.html', function () { $(this).trigger("create") });
+            $("#footerprofil").load('footer.html', function () { $(this).trigger("create") });
         });
     </script>
 
