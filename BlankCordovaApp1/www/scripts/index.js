@@ -29,57 +29,54 @@
         // TODO: cette application a été réactivée. Restaurez l'état de l'application ici.
     };
 
-    function getArticles() {
+    function getArticles(search) {
 
         var li = $('#articlelist li');
         var articlelist = $("#articlelist");
-        //var span = $("#itemCount");
-        var temp = [];
+        
+        // clear the ul
+        articlelist.empty();
 
         //$.getJSON("http://mmi_user:mmi@iut.corse@193.48.29.108/html/MMI/wordpress/Desmettre/wordpress/index.php/wp-json/wp/v2/posts", function (data) {
-        $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts", function (data) {
-            if (data.length > 0) {
+        //$.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts", function (data) {
+        $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts/?_embed&search="+search, function (data) {
+            if (data.length > 0 && search != "") {
                 $.each(data, function (index) {
-                    //var content = '<h1 class="ui-li-heading">' + data[index].title.rendered + '</h1><p class="ui-li-desc">Mon article</p>'
-                    var content = data[index].title.rendered
+                    var title = data[index].title.rendered;
+                    var description = data[index].excerpt.rendered;
+                    var content = '<h1 class="ui-li-heading">' + title + '</h1><p class="ui-li-desc">' + description + '</p>';
+
                     var article = '<li><a href="#">' + content + '</a></li>';
 
-                    // add content to remove old li after the add
-                    temp[index] = content;
-
-                    var exist = false;
-                    li.each(function () {
-                        if ($(this).html() == content) exist = true;
-                    });
-                    if (!exist) {
-                        articlelist.append(article);
-                    }
-
+                    // Add the element in the list
+                    articlelist.append(article);
+                    
                 });
-
-                // Refresh
-                articlelist.listview("refresh");
-
-                //navigator.notification.alert('a new article has just arrived', '','New Article', 'Ok');
             }
 
-           
-            li.each(function () {
-                if ($.inArray($(this).html(), temp) == -1) {
-                    $(this).remove();
-                }
-            });
+           // Refresh
+           articlelist.listview("refresh");
 
         });
-
-        //span.text(li.length);
     }
 
     function initialCheck() {
-        $("#articlelist").on("filterablefilter", function (event, ui) {
-            getArticles();
+        
+        $('#home').bind('pagebeforeshow', function (event) {
+            // add footer for all pages
+
+            $("#footerhome").load('footer.html', function () { $(this).trigger("create") });
+            $("#footerpropose").load('footer.html', function () {$(this).trigger("create")});
+            $("#footermessage").load('footer.html', function () {$(this).trigger("create")});
+            $("#footerprofil").load('footer.html', function () {$(this).trigger("create")});
+
+            // call the get Articles function to populate the ul depending on the search criteria
+            $("#search-basic").keyup(function () {
+                var iVal = $("#search-basic").val();
+                getArticles(iVal);
+            });
         });
-       
+
     };
 
 } )();
