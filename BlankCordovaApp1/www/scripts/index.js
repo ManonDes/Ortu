@@ -46,7 +46,7 @@
                     var description = data[index].excerpt.rendered;
                     var content = '<h1 class="ui-li-heading">' + title + '</h1><p class="ui-li-desc">' + description + '</p>';
 
-                    var article = '<li><a href="#">' + content + '</a></li>';
+                    var article = '<li><a href="article.html">' + content + '</a></li>';
 
                     // Add the element in the list
                     articlelist.append(article);
