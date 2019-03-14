@@ -44,9 +44,11 @@
                 $.each(data, function (index) {
                     var title = data[index].title.rendered;
                     var description = data[index].excerpt.rendered;
+                    var id = data[index].id;
+                  
                     var content = '<h1 class="ui-li-heading">' + title + '</h1><p class="ui-li-desc">' + description + '</p>';
 
-                    var article = '<li><a href="article.html">' + content + '</a></li>';
+                    var article = '<li><a href="#article?id='+id+'">' + content + '</a></li>';
 
                     // Add the element in the list
                     articlelist.append(article);
@@ -60,6 +62,7 @@
         });
     }
 
+
     function initialCheck() {
         
         $('#home').bind('pagebeforeshow', function (event) {
@@ -68,15 +71,47 @@
             $("#footerhome").load('footer.html', function () { $(this).trigger("create") });
             $("#footerpropose").load('footer.html', function () {$(this).trigger("create")});
             $("#footermessage").load('footer.html', function () {$(this).trigger("create")});
-            $("#footerprofil").load('footer.html', function () {$(this).trigger("create")});
+            $("#footerprofil").load('footer.html', function () { $(this).trigger("create") });
+            $("#footerarticle").load('footer.html', function () { $(this).trigger("create") });
+        
 
             // call the get Articles function to populate the ul depending on the search criteria
             $("#search-basic").keyup(function () {
                 var iVal = $("#search-basic").val();
                 getArticles(iVal);
             });
+        
+        });
+
+        $('#article').bind('pagebeforeshow', function (event) {
+          // populate the page from article properties
+
+            // url of article containing the id
+            var url = event.currentTarget.baseURI;
+
+            // surch the id from url
+            var re = /id=([0-9]*)/i;
+            var id = url.match(re)[1];
+
+            var article = $("#article");
+            
+            $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts/" + id, function (data) {
+                console.log(data);
+
+                var title = data.title.rendered;
+                //var description = data.excerpt.rendered;
+                var description = data.content.rendered;
+
+                article.append("<h1>" + title + "</h1>");
+                article.append("<p>" + description + "</p>");
+
+            });    
+
         });
 
     };
 
-} )();
+   
+
+})();
+
