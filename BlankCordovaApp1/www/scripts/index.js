@@ -34,30 +34,31 @@
         var li = $('#articlelist li');
         var articlelist = $("#articlelist");
         
-        // clear the ul
-        articlelist.empty();
+        var results = "";
 
         //$.getJSON("http://mmi_user:mmi@iut.corse@193.48.29.108/html/MMI/wordpress/Desmettre/wordpress/index.php/wp-json/wp/v2/posts", function (data) {
         //$.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts", function (data) {
-        $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts/?_embed&search="+search, function (data) {
+        $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts?_embed&search="+search, function (data) {
             if (data.length > 0 && search != "") {
                 $.each(data, function (index) {
                     var title = data[index].title.rendered;
                     var description = data[index].excerpt.rendered;
                     var id = data[index].id;
-                  
+
+                    var img_path = ""; 
+
                     var content = '<h1 class="ui-li-heading">' + title + '</h1><p class="ui-li-desc">' + description + '</p>';
 
-                    var article = '<li><a href="#article?id='+id+'">' + content + '</a></li>';
+                    //var article = '<li><a href="#article?id=' + id + '">' + content + '</a><img src='+img_path+'></li>';
+                    var article = '<li><a href="#article?id=' + id + '">' + content + '</a></li>';
 
                     // Add the element in the list
-                    articlelist.append(article);
-                    
+                    results += article;
                 });
             }
 
-           // Refresh
-           articlelist.listview("refresh");
+           // Clear, append and refresh
+            articlelist.empty().append(results).listview('refresh');
 
         });
     }
@@ -85,7 +86,7 @@
 
         $('#article').bind('pagebeforeshow', function (event) {
           // populate the page from article properties
-
+      
             // url of article containing the id
             var url = event.currentTarget.baseURI;
 
@@ -93,17 +94,17 @@
             var re = /id=([0-9]*)/i;
             var id = url.match(re)[1];
 
-            var article = $("#article");
-            
+            //var id = $(event.currentTarget).context.children[0].id;
+            var article = $("#contentarticle");
+
+            article.empty();
+
             $.getJSON("http://www.pjc-graphics.com/index.php/wp-json/wp/v2/posts/" + id, function (data) {
-                console.log(data);
 
                 var title = data.title.rendered;
-                //var description = data.excerpt.rendered;
                 var description = data.content.rendered;
 
-                article.append("<h1>" + title + "</h1>");
-                article.append("<p>" + description + "</p>");
+                article.append("<h1>" + title + "</h1> <p> " + description + "</p>");
 
             });    
 
