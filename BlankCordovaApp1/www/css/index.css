@@ -78,3 +78,48 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+
+/*Mise en page formulaire je propose*/
+form {
+    width: 100%;
+    margin: 0;
+}
+
+    form p {
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: solid 1px #b6cc85;
+        padding: 2px;
+    }
+
+form div {
+  
+    width:100%;
+    padding:4px;
+}
+ .ui-checkbox {
+     float:left;
+ }
+
+.ui-checkbox acces {
+    display: inline;
+}
+
+fieldset {
+   
+    border: 5px solid white;
+}
+
+legend {
+    background: #b6cc85;
+    color: white;
+    font-size: 15px;
+    font-weight:400;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+

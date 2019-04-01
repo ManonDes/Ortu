@@ -49,18 +49,58 @@
 
     <div data-role="page" id="propose">
 
-        <div data-role="header" data-theme="b" data-add-back-btn="true" data-back-btn-text="">
-
-            <div id="logoheader"><img src="images/logoheader.png" /></div>
-
+        <div data-role="header" data-theme="b" data-add-back-btn="true" data-back-btn-text="Retour">
+            <!--<img src="images/gardening.png"/>-->
+            <div id="logoheader"><img src="images/logoheader.png" id="logoheader" /></div>
         </div>
 
         <div data-role="content">
 
+            <label for="propose">Prix €/mois</label>
+            <input type="number" pattern="[0-9]*" data-politespace data-grouplength="3" data-delimiter="," data-reverse value="" />
         </div>
+      
+        <!--Formulaire de saisie -->
+        <form>
+            <fieldset>
+                <legend>Veuillez sélectionner les accès proposés :</legend>
+                <p>Eau</p>
+                <div>
+                    <input type="checkbox" id="acces" name="interest" value="coding">
+                    <label for="Acces">Robinet</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="acces" name="interest" value="music">
+                    <label for="Acces">Récupérateur d'eau</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="acces" name="interest" value="art">
+                    <label for="Acces">Pas d'accès</label>
+                </div>
 
-        <div data-role="footer" data-theme="b" data-position="fixed" id="footerpropose">
-        </div>
+                <p>Outils à disposition</p>
+                <div>
+                    <input type="checkbox" id="acces" name="interest" value="sports">
+                    <label for="Acces">Outils de jardinage fournis</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="acces" name="interest" value="cooking">
+                    <label for="Acces">Accès à un cabanon</label>
+                </div>
+
+                <textarea rows="4" cols="50" name="comment" form="usrform">
+Ajouter une description</textarea>
+
+                <div id="btnSubmit">
+                    <button type="submit">Envoyer</button>
+                </div>
+            </fieldset>
+        </form>
+   
+    </div>
+
+    <div data-role="footer" data-theme="b" data-position="fixed" id="footerpropose">
+    </div>
 
     </div>
 
